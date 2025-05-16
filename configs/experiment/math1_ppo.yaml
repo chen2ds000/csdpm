@@ -1,0 +1,45 @@
+# @package _global_
+general:
+    name : 'math1csg'
+    gpus : 1
+    wandb: 'disabled'
+    resume: null
+    test_only: null
+    check_val_every_n_epochs: 10
+    sample_every_val: 1
+    samples_to_generate: 40
+    samples_to_save: 9
+    chains_to_save: 1
+    final_model_samples_to_generate: 3
+    final_model_samples_to_save: 2
+    final_model_chains_to_save: 1
+    vallike: False
+    sampleloop: 1
+    step_freq: 1
+    innerloop: 1
+    partial: True
+    fix: 0.5
+    ppo_sr: 0.4
+    val_check_interval: None
+    val_method: "solo"
+    train_method: "gdpo"
+    test_method: "dktauc"
+train:
+    lr: 0.001
+    n_epochs: 50
+    batch_size: 8
+    weight_decay: 1e-12
+    save_model: True
+
+model:
+    diffusion_steps: 100
+    n_layers: 8
+    lambda_train: [5, 0]
+    extra_features: 'all'
+
+    # Do not set hidden_mlp_E, dim_ffE too high, computing large tensors on the edges is costly
+    # At the moment (03/08), y contains quite little information
+    hidden_mlp_dims: { 'X': 128, 'E': 64, 'y': 128 }
+
+    # The dimensions should satisfy dx % n_head == 0
+    hidden_dims: { 'dx': 256, 'de': 64, 'dy': 64, 'n_head': 8, 'dim_ffX': 256, 'dim_ffE': 64, 'dim_ffy': 256 }
