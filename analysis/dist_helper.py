@@ -1,8 +1,4 @@
-###############################################################################
-#
-# Adapted from https://github.com/lrjconan/GRAN/ which in turn is adapted from https://github.com/JiaxuanYou/graph-generation
-#
-###############################################################################
+
 import pyemd
 import numpy as np
 import concurrent.futures
@@ -34,11 +30,7 @@ def l2(x, y):
 
 
 def emd(x, y, sigma=1.0, distance_scaling=1.0):
-    ''' EMD
-        Args:
-            x, y: 1D pmf of two distributions with the same support
-            sigma: standard deviation
-    '''
+  
     support_size = max(len(x), len(y))
     d_mat = toeplitz(range(support_size)).astype(np.float)
     distance_mat = d_mat / distance_scaling
@@ -55,11 +47,7 @@ def emd(x, y, sigma=1.0, distance_scaling=1.0):
 
 
 def gaussian_emd(x, y, sigma=1.0, distance_scaling=1.0):
-    ''' Gaussian kernel with squared distance in exponential term replaced by EMD
-        Args:
-            x, y: 1D pmf of two distributions with the same support
-            sigma: standard deviation
-    '''
+   
     support_size = max(len(x), len(y))
     d_mat = toeplitz(range(support_size)).astype(np.float)
     distance_mat = d_mat / distance_scaling
